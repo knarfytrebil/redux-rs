@@ -304,7 +304,8 @@ impl<T: Reducer> InternalStore<T> {
 
         self.is_dispatching = true;
         match self.data.reduce(action.clone()) {
-            Ok(_) => {}
+            // Ok(_) => {}
+            Ok(next_state) => { self.data = next_state; }
             Err(e) => {
                 return Err(format!("{}", e));
             }
